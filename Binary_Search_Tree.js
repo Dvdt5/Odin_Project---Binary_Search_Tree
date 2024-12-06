@@ -79,6 +79,22 @@ export default class BinarySearchTree {
         return root;
     }
 
+    // Logs the node of given value
+    find(value, root=this.root){
+
+        if (root.data == value){
+            console.log(root);
+        }
+
+        if (root.data < value) {
+            root.right = this.find(value, root.right);
+        } else if (root.data > value){
+            root.left = this.find(value, root.left);
+        }
+    }
+
+
+
     // Gets the most left child after the first right child of root
     getMostLeftChild(root){
         let currNode = root;

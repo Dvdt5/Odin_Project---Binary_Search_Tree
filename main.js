@@ -8,5 +8,4 @@ const binaryTree = new BinarySearchTree(array);
 
 
 binaryTree.prettyPrint(binaryTree.root);
-binaryTree.deleteItem(67);
-binaryTree.prettyPrint(binaryTree.root);
+binaryTree.find(1);
