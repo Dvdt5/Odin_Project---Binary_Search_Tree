@@ -2,9 +2,9 @@
 
 class Node {
 
-    constructor(mid, left, right){
+    constructor(mid, left=null, right=null){
         this.left = left;
-        this.root = mid;
+        this.data = mid;
         this.right = right;
     }
 }
@@ -31,6 +31,62 @@ export default class BinarySearchTree {
         return node;
     }
 
+    insert(value, root=this.root){
+        if (root == null) {
+            return new Node(value)
+        }
+
+        if (root == value) {
+            return root;
+        }
+        
+        if (root.data < value) {
+            root.right = this.insert(value, root.right);
+        } else if (root.data > value){
+            root.left = this.insert(value, root.left);
+        }
+        
+        return root
+    }
+
+    deleteItem(value, root=this.root){
+
+        if (root.data < value) {
+            root.right = this.deleteItem(value, root.right);
+        } else if (root.data > value){
+            root.left = this.deleteItem(value, root.left);
+        } else {
+
+            // If root has no child
+            if ( root.left == null && root.right == null){
+                return null;
+            }
+
+            // If has only 1 child
+            if (root.right == null) {
+                return root.left;
+            } else if (root.left == null){
+                return root.right;
+            }
+
+            // If has 2 child 
+            if (root.right && root.left){
+                let mostLeft = this.getMostLeftChild(root.right);
+                root.data = mostLeft.data;
+                root.right = this.deleteItem(mostLeft.data, root.right)
+            }
+        }
+        return root;
+    }
+
+    // Gets the most left child after the first right child of root
+    getMostLeftChild(root){
+        let currNode = root;
+        while (currNode.left != null){
+            currNode = currNode.left;
+        }
+        return currNode;
+    }
 
     sortArray(array){
         return array.sort((a, b) => a - b);
@@ -48,16 +104,18 @@ export default class BinarySearchTree {
         return returnArr;
     }
 
+
+    // Prints the tree
     prettyPrint (node, prefix = "", isLeft = true){
         if (node === null) {
             return;
         }
         if (node.right !== null) {
-            this.prettyPrint(node.right, `${prefix}${isLeft ? "v   " : "    "}`, false);
+            this.prettyPrint(node.right, `${prefix}${isLeft ? "I     " : "      "}`, false);
         }
-        console.log(`${prefix}${isLeft ? "v>-- " : "^>-- "}(${node.root})`);
+        console.log(`${prefix}${isLeft ? "v==> " : "^==> "}(${node.data})`);
         if (node.left !== null) {
-            this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "^   "}`, true);
+            this.prettyPrint(node.left, `${prefix}${isLeft ? "      " : "I     "}`, true);
         }
     };
 }
