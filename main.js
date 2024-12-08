@@ -9,6 +9,12 @@ const binaryTree = new BinarySearchTree(array);
 
 binaryTree.prettyPrint(binaryTree.root);
 let testArr = [];
+binaryTree.inOrder(i => testArr.push(i));
+console.log(testArr);
+testArr = []
 binaryTree.preOrder(i => testArr.push(i));
+console.log(testArr);
+testArr = []
+binaryTree.postOrder(i => testArr.push(i));
 console.log(testArr);
 

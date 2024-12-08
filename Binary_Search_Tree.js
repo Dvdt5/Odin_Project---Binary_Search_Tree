@@ -118,11 +118,30 @@ export default class BinarySearchTree {
 
     }
 
+    // Gets node data in inorder, requires callback function
+    inOrder(callback, root=this.root){
+        
+        if (root == null) {
+            return;
+        }
+
+        this.inOrder(callback, root.left);
+        
+        if (callback){
+            callback(root.data);  
+        } else {
+            throw new Error('Enter a Callback function!');
+        }
+        
+        this.inOrder(callback, root.right);
+        
+    }
+
     // Gets node data in preorder, requires callback function
     preOrder(callback, root=this.root){
         
         if (root == null) {
-            return root;
+            return ;
         }
 
         if (callback){
@@ -134,6 +153,25 @@ export default class BinarySearchTree {
 
         this.preOrder(callback, root.left);
         this.preOrder(callback, root.right);
+        
+    }
+
+    // Gets node data in postorder, requires callback function
+    postOrder(callback, root=this.root){
+        
+        if (root == null) {
+            return ;
+        }
+
+
+        this.postOrder(callback, root.left);
+        this.postOrder(callback, root.right);
+        if (callback){
+            callback(root.data);  
+        } else {
+            throw new Error('Enter a Callback function!');
+        }
+        
         
     }
 
