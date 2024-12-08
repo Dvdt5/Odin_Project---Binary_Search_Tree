@@ -8,4 +8,5 @@ const binaryTree = new BinarySearchTree(array);
 
 
 binaryTree.prettyPrint(binaryTree.root);
-binaryTree.find(1);
+
+

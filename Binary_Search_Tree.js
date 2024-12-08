@@ -94,6 +94,29 @@ export default class BinarySearchTree {
     }
 
 
+    // Gets node data in level order, requires callback function
+    levelOrder(callback){
+        let queue = [this.root];
+        let currNode;
+
+        let returnArr = [];
+
+        while (queue.length > 0) {
+            currNode = queue.shift();
+
+            if (callback){
+                callback(currNode.data);  
+            } else {
+                throw new Error('Enter a Callback function!');
+            }
+            
+
+            if (null != currNode.left) queue.push(currNode.left);
+            if (null != currNode.right) queue.push(currNode.right);
+            returnArr.push(currNode.data);
+        }
+
+    }
 
     // Gets the most left child after the first right child of root
     getMostLeftChild(root){
