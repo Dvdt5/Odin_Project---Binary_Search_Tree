@@ -8,5 +8,7 @@ const binaryTree = new BinarySearchTree(array);
 
 
 binaryTree.prettyPrint(binaryTree.root);
-
+let testArr = [];
+binaryTree.preOrder(i => testArr.push(i));
+console.log(testArr);
 

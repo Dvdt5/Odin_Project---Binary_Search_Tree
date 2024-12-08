@@ -118,6 +118,25 @@ export default class BinarySearchTree {
 
     }
 
+    // Gets node data in preorder, requires callback function
+    preOrder(callback, root=this.root){
+        
+        if (root == null) {
+            return root;
+        }
+
+        if (callback){
+            callback(root.data);  
+        } else {
+            throw new Error('Enter a Callback function!');
+        }
+
+
+        this.preOrder(callback, root.left);
+        this.preOrder(callback, root.right);
+        
+    }
+
     // Gets the most left child after the first right child of root
     getMostLeftChild(root){
         let currNode = root;
