@@ -175,6 +175,37 @@ export default class BinarySearchTree {
         
     }
 
+    height(node=this.root){
+        if (node == null){
+            return -1;
+        }
+
+        let leftHeight = this.height(node.left);
+        let rightHeight = this.height(node.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    depth(node=this.root){
+        
+        let depthCount = 0;
+        let currNode = this.root;
+
+        while (currNode) {
+            if (node.data < currNode.data) {
+                currNode = currNode.left;
+                depthCount++;
+              } else if (node.data > currNode.data) {
+                currNode = currNode.right;
+                depthCount++;
+              } else {
+                return depthCount;
+              }
+        }
+
+    }
+
+
     // Gets the most left child after the first right child of root
     getMostLeftChild(root){
         let currNode = root;
