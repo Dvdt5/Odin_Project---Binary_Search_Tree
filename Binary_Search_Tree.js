@@ -36,7 +36,7 @@ export default class BinarySearchTree {
             return new Node(value)
         }
 
-        if (root == value) {
+        if (root.data == value) {
             return root;
         }
         
@@ -128,7 +128,7 @@ export default class BinarySearchTree {
         this.inOrder(callback, root.left);
         
         if (callback){
-            callback(root.data);  
+            callback(root);  
         } else {
             throw new Error('Enter a Callback function!');
         }
@@ -145,7 +145,7 @@ export default class BinarySearchTree {
         }
 
         if (callback){
-            callback(root.data);  
+            callback(root);  
         } else {
             throw new Error('Enter a Callback function!');
         }
@@ -167,7 +167,7 @@ export default class BinarySearchTree {
         this.postOrder(callback, root.left);
         this.postOrder(callback, root.right);
         if (callback){
-            callback(root.data);  
+            callback(root);  
         } else {
             throw new Error('Enter a Callback function!');
         }
@@ -179,10 +179,10 @@ export default class BinarySearchTree {
         if (node == null){
             return -1;
         }
-
+        
         let leftHeight = this.height(node.left);
         let rightHeight = this.height(node.right);
-
+        
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
@@ -205,6 +205,30 @@ export default class BinarySearchTree {
 
     }
 
+    // needs to be remade
+    isBalanced(node=this.root){
+        if (node == null){
+            return true;
+        }
+
+        let l = this.height(node.left);
+        let r = this.height(node.right);
+
+
+        if (Math.abs(l - r) <= 1 && this.isBalanced(node.left) && this.isBalanced(node.right)){
+            
+            return true;
+            
+        } 
+        return false;
+    }
+
+
+    reBalance(){
+        let newArr = [];
+        this.inOrder(node => newArr.push(node.data));
+        this.root = this.buildTree(newArr, 0, newArr.length -1)
+    }
 
     // Gets the most left child after the first right child of root
     getMostLeftChild(root){
