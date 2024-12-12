@@ -105,7 +105,7 @@ export default class BinarySearchTree {
             currNode = queue.shift();
 
             if (callback){
-                callback(currNode.data);  
+                callback(currNode);  
             } else {
                 throw new Error('Enter a Callback function!');
             }
